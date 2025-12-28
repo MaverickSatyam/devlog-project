@@ -32,7 +32,7 @@
         </div>
     </header>
 
-    <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed font-serif">
+    <div class="prose prose-lg max-w-none text-gray-800 leading-relaxed font-serif" style="white-space: pre-line">
         {{ $post->content }}
     </div>
 </article>
