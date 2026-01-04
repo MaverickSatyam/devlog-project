@@ -23,12 +23,12 @@
                             <span class="text-sm font-medium text-gray-900">Good day, {{ explode(' ', auth()->user()->name)[0] }}</span>
                             <span class="text-xs text-gray-500">Author Account</span>
                         </div>
-
+                        @if(!Route::is('posts.create') && !Route::is('posts.edit'))
                         <a href="{{ route('posts.create') }}" class="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full shadow-sm transition-all duration-200">
                             <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                             <span class="hidden sm:inline">New Post</span>
                         </a>
-
+                        @endif
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
                             <button type="submit" class="p-2 text-gray-500 rounded-lg hover:bg-gray-100" title="Logout">
@@ -51,11 +51,13 @@
         @yield('content')
     </div>
     @auth
-        <a href="{{ route('posts.create') }}" 
-        class="fixed bottom-8 right-8 z-50 flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span class="font-bold tracking-wide">Write Post</span>
-        </a>
+        @if(!Route::is('posts.create') && !Route::is('posts.edit'))
+            <a href="{{ route('posts.create') }}" 
+            class="fixed bottom-8 right-8 z-50 flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                <span class="font-bold tracking-wide">Write Post</span>
+            </a>
+        @endif
     @endauth
         @if(session('success'))
         <div id="toast" class="fixed top-24 right-8 z-50 bg-gray-900 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-bounce">
